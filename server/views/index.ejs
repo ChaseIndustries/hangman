@@ -1,0 +1,86 @@
+<html ng-app="hangmanApp">
+    <body ng-controller="hangmanController">
+        <div class="game-wrapper">
+            <div class="display-area">
+                <div class="hangman">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 407.33">
+                           <defs>
+                              <style>.cls-1,.cls-3{fill:none;stroke:#000;stroke-miterlimit:10;}.cls-2{fill:#fff;}.cls-3{stroke-width:2px;}</style>
+                           </defs>
+                           <title>hangman</title>
+                           <g id="Layer_2" data-name="Layer 2">
+                              <g id="gallows">
+                                 <g id="gallows-2" data-name="gallows">
+                                    <rect class="cls-1" x="230.67" y="-18" width="8" height="174.67" transform="translate(19.71 186.24) rotate(-45)" />
+                                    <rect class="cls-1" x="37.66" y="7.33" width="3.67" height="65.76" />
+                                    <polygon class="cls-2" points="287.83 398.83 287.83 10.47 0.5 10.47 0.5 0.5 301.2 0.5 301.2 3.83 301.5 3.83 301.5 398.83 287.83 398.83" />
+                                    <path d="M300.7,1V4.33h.3v394H288.33V10H1V1H300.7m1-1H0V11H287.33V399.33H302V3.33h-.3V0Z" />
+                                    <polygon class="cls-2" points="186.09 400.17 288.71 391.17 301.33 391.17 404.51 400.17 186.09 400.17" />
+                                    <path d="M301.29,391.67l91.73,8H197.51l91.2-8h12.58m0-1H288.67l-114,10H416l-114.67-10Z" />
+                                    <rect class="cls-2" x="173.83" y="400.5" width="245.67" height="6.33" />
+                                    <path d="M419,401v5.33H174.33V401H419m1-1H173.33v7.33H420V400Z" />
+                                    <rect class="cls-1" x="31.33" y="0.67" width="15.33" height="10" />
+                                 </g>
+                                 <line id="body" class="cls-1" x1="40.5" y1="90" x2="40.5" y2="207.5" ng-if="guesses.length >= 2" />
+                                 <line id="left-arm" ng-if="guesses.length >= 5" class="cls-1" x1="40.5" y1="90.5" x2="13.5" y2="192.5" />
+                                 <line id="right-arm" ng-if="guesses.length >= 6" class="cls-1" x1="40.5" y1="90.5" x2="69.5" y2="194.5" />
+                                 <g id="right-leg" ng-if="guesses.length >= 4">
+                                    <line class="cls-1" x1="40.5" y1="207.5" x2="60.5" y2="265.5" />
+                                    <line class="cls-1" x1="60.5" y1="265.5" x2="53.5" y2="333.5" />
+                                 </g>
+                                 <g id="left-leg" ng-if="guesses.length >= 3">
+                                    <line class="cls-1" x1="40.5" y1="207.5" x2="21" y2="265.5" />
+                                    <line class="cls-1" x1="21" y1="265.5" x2="27.82" y2="333.5" />
+                                 </g>
+                                 <g id="left-hand" ng-if="guesses.length >= 9">
+                                    <line class="cls-3" x1="13.5" y1="192.5" x2="18.5" y2="201.5" />
+                                    <line class="cls-3" x1="13.5" y1="192.5" x2="10.5" y2="207.5" />
+                                    <line class="cls-3" x1="10.5" y1="207.5" x2="12" y2="216.67" />
+                                 </g>
+                                 <g id="right-hand" ng-if="guesses.length >= 10">
+                                    <line class="cls-3" x1="69.99" y1="195.5" x2="64.6" y2="204.5" />
+                                    <line class="cls-3" x1="69.99" y1="195.5" x2="73.23" y2="210.5" />
+                                    <line class="cls-3" x1="73.23" y1="210.5" x2="71.61" y2="219.67" />
+                                 </g>
+                                 <g id="left-foot" ng-if="guesses.length >= 7">
+                                    <line class="cls-3" x1="30" y1="328.67" x2="24" y2="346" />
+                                    <line class="cls-3" x1="24" y1="345.33" x2="22" y2="360" />
+                                 </g>
+                                 <g id="right-foot" ng-if="guesses.length >= 8">
+                                    <line class="cls-3" x1="51.33" y1="328" x2="56" y2="346" />
+                                    <line class="cls-3" x1="56" y1="344.67" x2="56" y2="360" />
+                                 </g>
+                                 <g id="head" ng-if="guesses.length >= 1">
+                                    <path class="cls-2" d="M39.83,89.71c-2.46-1.9-19.38-15.58-19.38-31.87,0-18.16,9.31-20.67,19.38-20.67s19.38,2.5,19.38,20.67C59.21,74.14,42.29,87.81,39.83,89.71Z" />
+                                    <path d="M39.83,37.67c11.33,0,18.88,3.43,18.88,20.17,0,15.51-15.62,28.66-18.88,31.24C36.57,86.5,21,73.35,21,57.83c0-8,1.79-13.43,5.47-16.55,3-2.5,7.09-3.62,13.41-3.62m0-1c-11,0-19.88,3.22-19.88,21.17s19.88,32.5,19.88,32.5,19.88-14.55,19.88-32.5-8.9-21.17-19.88-21.17Z" />
+                                 </g>
+                              </g>
+                           </g>
+                        </svg>
+                </div>
+                <div class="guesses">
+                    <input type="text" ng-repeat="guess in answer track by $index" value="{{ guess.toUpperCase() }}" readonly />
+                </div>
+            </div>
+            <div class="guess-area">
+                <div class="game-state" ng-if="gameLost || gameWon">
+                    <div ng-if="gameWon" class="game-lost game-state__text">You won the game</div>
+                    <div ng-if="gameLost" class="game-won game-state__text">You lost</div>
+                    <div class="wins-losses">
+                        <div class="wins">Wins: {{ wins }}</div>
+                        <div class="losses">Losses: {{ losses }}</div>
+                    </div>
+                    <a class="reset" href="javascript:;" ng-click="reset()">Reset</a>
+                </div>
+                <div class="letter-wrapper">
+                    <div ng-repeat="letter in letters">
+                        <div ng-if="letter.guessed" ng-class="'letter letter--guessed ' + (letter.correct ? 'letter--correct' : 'letter--incorrect')" >{{ letter.letter }}</div>
+                        <a ng-if="!letter.guessed" class="letter" href="javascript:;" ng-click="guess(letter, $index)">{{ letter.letter }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>var userKey = <%-userKey%></script>
+    <script src="js/app.js"></script>
+    </body>
+</html>

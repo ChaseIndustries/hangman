@@ -1,0 +1,31 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "a hangman game made with angularJS and nodeJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --watch & npm run serve",
+    "serve": "nodemon --watch server server --exec babel-node",
+    "start": "npm run serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {
+    "@std/esm": "^0.5.1",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.5",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5"
+  }
+}
