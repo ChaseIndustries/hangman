@@ -18,7 +18,7 @@ app.set('views', `${__dirname}/views`);
 
 
 function getRandomWord() {
-    return axios.get('http://setgetgo.com/randomword/get.php')
+    return axios.get('http://setgetgo.com/randomword/get.php?len=6')
 }
 
 app.get('/num-letters', (req, res) => {
