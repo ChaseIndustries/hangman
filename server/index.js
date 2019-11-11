@@ -1,8 +1,6 @@
 require('@std/esm')
 
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 
@@ -18,7 +16,20 @@ app.set('views', `${__dirname}/views`);
 
 
 function getRandomWord() {
-    return axios.get('http://setgetgo.com/randomword/get.php?len=6')
+    return axios({
+      "method":"GET",
+      "url":"https://wordsapiv1.p.rapidapi.com/words/",
+      "headers":{
+      "content-type":"application/octet-stream",
+      "x-rapidapi-host":"wordsapiv1.p.rapidapi.com",
+      "x-rapidapi-key":"137cfea8b7msh307526478de4477p18d919jsn8973158092e2"
+      },
+      "params":{
+        "random":"true",
+        "lettersMin": 4,
+        "lettersMax": 10
+      }
+      }).then(res => res.data.word);
 }
 
 app.get('/num-letters', (req, res) => {
@@ -33,11 +44,10 @@ app.post('/guess', (req, res) => {
         userKey = body.userKey,
         answer = answers[userKey] || '',
         guessRegEx = new RegExp(guess, 'ig');
-    let i = 0,
-        indexes = [],
+    let indexes = [],
         correct = false,
         match;
-    while ((match = guessRegEx.exec(answer)) != null) {
+    while ((match = guessRegEx.exec(answer)) !== null) {
         indexes.push(match.index);
     }
     if (indexes.length) {
@@ -49,9 +59,8 @@ app.post('/guess', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    getRandomWord().then((data) => {
-        const timestamp = new Date().getTime(),
-            answer = data.data;
+    getRandomWord().then((answer) => {
+        const timestamp = new Date().getTime();
         answers[timestamp] = answer;
         guesses[timestamp] = [];
         res.render('index', { userKey: timestamp })
@@ -59,9 +68,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/reset', (req, res) => {
-    getRandomWord().then((data) => {
-        const timestamp = new Date().getTime(),
-            answer = data.data;
+    getRandomWord().then((answer) => {
+        const timestamp = new Date().getTime();
         answers[timestamp] = answer;
         guesses[timestamp] = [];
         res.send({ reset: true, userKey: timestamp });
